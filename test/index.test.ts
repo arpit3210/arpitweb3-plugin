@@ -1,9 +1,9 @@
 import { Web3, Web3BaseWalletAccount } from "web3";
 import { Wallet } from "web3-eth-accounts";
-import { SwisstronikPlugin } from "../src";
+import { ArpitWeb3Plugin } from "../src";
 import { abi } from "./ERC20ABI";
 
-describe("SwisstronikPlugin Tests", () => {
+describe("ArpitWeb3Plugin Tests", () => {
   let consoleSpy: jest.SpiedFunction<typeof global.console.log>;
 
   let web3: Web3;
@@ -13,7 +13,7 @@ describe("SwisstronikPlugin Tests", () => {
 
   beforeAll(() => {
     web3 = new Web3(NODE_HTTP_URL);
-    web3.registerPlugin(new SwisstronikPlugin());
+    web3.registerPlugin(new ArpitWeb3Plugin());
 
     consoleSpy = jest.spyOn(global.console, "log").mockImplementation();
     wallet = web3.eth.accounts.wallet.add(
@@ -29,12 +29,12 @@ describe("SwisstronikPlugin Tests", () => {
     expect(web3.swisstronik).toBeDefined();
   });
 
-  it("should call SwisstronikPlugin to request node public key", async () => {
+  it("should call ArpitWeb3Plugin to request node public key", async () => {
     const resp = await web3.swisstronik.getNodePublicKey();
     expect(resp).toBeDefined();
   });
 
-  describe("SwisstronikPlugin eth calls", () => {
+  describe("ArpitWeb3Plugin eth calls", () => {
     it("getStorageAt should error", async () => {
       await expect(async () => {
         await web3.eth.getStorageAt("0x0", 1);
@@ -91,7 +91,7 @@ describe("SwisstronikPlugin Tests", () => {
     }, 20000);
   });
 
-  describe("SwisstronikPlugin contract calls", () => {
+  describe("ArpitWeb3Plugin contract calls", () => {
     const ERC20_CONTRACT_ADDRESS = "0x22B01aa7E98dF5dF7C034689A300c6E06cc89Cb3";
 
     it("Should fetch ERC20 balanceOf", async () => {

@@ -1,8 +1,3 @@
-# Swisstronik Web3 Plugin
-
-[![npm version](https://img.shields.io/badge/npm-1.5.0-brightgreen)](https://www.npmjs.com/package/@swisstronik/web3-plugin-swisstronik)
-
-Swisstronik Web3.js Plugin allows the users to use Web3.js library with [Swisstronik](https://swisstronik.com)
 
 ### Supported methods:
 
@@ -16,7 +11,7 @@ Swisstronik Web3.js Plugin allows the users to use Web3.js library with [Swisstr
 > Note: Make sure you are using `web3` version 4.11.1 or higher in your project.
 
 ```bash
-npm install @swisstronik/web3-plugin-swisstronik web3@latest --save
+npm install arpitweb3-plugin web3@latest --save
 ```
 
 ## Usage
@@ -25,10 +20,10 @@ npm install @swisstronik/web3-plugin-swisstronik web3@latest --save
 
 ```js
 import { Web3 } from "web3";
-import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
+import { ArpitWeb3Plugin } from "@swisstronik/web3-plugin-swisstronik";
 
 const web3 = new Web3("https://json-rpc.testnet.swisstronik.com/"); // Any RPC node you wanted to connect with
-web3.registerPlugin(new SwisstronikPlugin());
+web3.registerPlugin(new ArpitWeb3Plugin());
 
 // Get node public key
 web3.swisstronik.getNodePublicKey().then((resp) => {
@@ -40,10 +35,10 @@ web3.swisstronik.getNodePublicKey().then((resp) => {
 
 ```js
 import { Web3 } from "web3";
-import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
+import { ArpitWeb3Plugin } from "@swisstronik/web3-plugin-swisstronik";
 
 const web3 = new Web3("https://json-rpc.testnet.swisstronik.com/"); // Any RPC node you wanted to connect with
-web3.registerPlugin(new SwisstronikPlugin());
+web3.registerPlugin(new ArpitWeb3Plugin());
 let wallet = web3.eth.accounts.wallet.add("0x..."); // Private Key
 
 let tx = {
@@ -68,10 +63,10 @@ console.log(sentTxReceipt);
 
 ```js
 import { Web3, DEFAULT_RETURN_FORMAT } from "web3";
-import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
+import { ArpitWeb3Plugin } from "@swisstronik/web3-plugin-swisstronik";
 
 const web3 = new Web3("https://json-rpc.testnet.swisstronik.com/"); // Any RPC node you wanted to connect with
-web3.registerPlugin(new SwisstronikPlugin());
+web3.registerPlugin(new ArpitWeb3Plugin());
 let wallet = web3.eth.accounts.wallet.add("0x..."); // Private Key
 
 const contract = new web3.eth.Contract(abi, ERC20_CONTRACT_ADDRESS);
@@ -96,7 +91,7 @@ console.log(sentTxReceipt);
 
 ```js
 import { Web3 } from "web3";
-import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
+import { ArpitWeb3Plugin } from "@swisstronik/web3-plugin-swisstronik";
 
 // With any RPC node and private key
 const web3 = new Web3("https://json-rpc.testnet.swisstronik.com/");
@@ -109,7 +104,7 @@ const [account] = await window.ethereum.request({
   method: "eth_requestAccounts"
 });
 
-web3.registerPlugin(new SwisstronikPlugin("https://json-rpc.testnet.swisstronik.com/"));
+web3.registerPlugin(new ArpitWeb3Plugin("https://json-rpc.testnet.swisstronik.com/"));
 ```
 
 Refer to [Swisstronik Developer Docs](https://swisstronik.gitbook.io/swisstronik-docs/) for more information & usage scenarios.

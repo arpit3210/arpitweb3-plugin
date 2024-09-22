@@ -2,7 +2,7 @@ import { Web3, Web3Context, Web3PluginBase } from "web3";
 import { SWTRMiddleware } from "./SWTRMiddleware";
 import { getNodePublicKey } from "@swisstronik/utils";
 
-export class SwisstronikPlugin extends Web3PluginBase {
+export class ArpitWeb3Plugin extends Web3PluginBase {
   public pluginNamespace = "swisstronik";
   public middleware: SWTRMiddleware;
   static web3: Web3;
@@ -10,7 +10,7 @@ export class SwisstronikPlugin extends Web3PluginBase {
 
   constructor(rpcEndpoint?: string) {
     super();
-    if (rpcEndpoint) SwisstronikPlugin.rpcEndpoint = rpcEndpoint;
+    if (rpcEndpoint) ArpitWeb3Plugin.rpcEndpoint = rpcEndpoint;
 
     this.middleware = new SWTRMiddleware(this.getNodePublicKey);
   }
@@ -21,24 +21,24 @@ export class SwisstronikPlugin extends Web3PluginBase {
     
     const clientUrl = (parentContext?.currentProvider as any)?.clientUrl;
     if (
-      !SwisstronikPlugin.rpcEndpoint &&
+      !ArpitWeb3Plugin.rpcEndpoint &&
       clientUrl &&
       typeof clientUrl === "string"
     ) {
-      SwisstronikPlugin.rpcEndpoint = clientUrl;
+      ArpitWeb3Plugin.rpcEndpoint = clientUrl;
     }
 
-    SwisstronikPlugin.web3 = new Web3(parentContext.provider);
-    this.middleware.web3 = SwisstronikPlugin.web3;
+    ArpitWeb3Plugin.web3 = new Web3(parentContext.provider);
+    this.middleware.web3 = ArpitWeb3Plugin.web3;
 
     super.link(parentContext);
   }
 
   public async getNodePublicKey(): Promise<string> {
-    if (!SwisstronikPlugin.rpcEndpoint)
+    if (!ArpitWeb3Plugin.rpcEndpoint)
       throw new Error("RPC endpoint is not set");
 
-    let { publicKey } = await getNodePublicKey(SwisstronikPlugin.rpcEndpoint);
+    let { publicKey } = await getNodePublicKey(ArpitWeb3Plugin.rpcEndpoint);
     return publicKey!;
   }
 }
@@ -46,6 +46,6 @@ export class SwisstronikPlugin extends Web3PluginBase {
 // Module Augmentation
 declare module "web3" {
   interface Web3Context {
-    swisstronik: SwisstronikPlugin;
+    swisstronik: ArpitWeb3Plugin;
   }
 }
